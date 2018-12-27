@@ -1,11 +1,19 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
+
+mongoose.connect(
+  `mongodb+srv://giamma:${
+    process.env.MONGO_ATLAS_PW
+  }@cluster0-lcjn7.mongodb.net/test?retryWrites=true`,
+  { useNewUrlParser: true },
+);
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
